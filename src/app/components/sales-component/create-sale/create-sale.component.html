@@ -1,0 +1,39 @@
+<div class="row shadow-lg round pb-4 pt-3 mx-auto" [ngStyle]="{'max-width': '36%'}">
+    <h4 class="text-center display-4">New Sale</h4>
+    <p class="text-center fw-bold">Enter new sale information</p>
+    <div class="col-1"></div>
+    <div class="col px-4">
+        <form class="form" [formGroup]="newSaleForm" (change)="onBlur()">
+            <div class="mb-3">
+                <label for="salename" class="form-label fw-bold">Sale Name</label>
+                <input type="text" class="form-control" id="salename" aria-describedby="usernmeHelp"
+                    formControlName="name">
+            </div>
+            <div class="mb-3">
+                <label for="saleQty" class="form-label fw-bold">Quantity</label>
+                <input type="number" class="form-control" id="saleQty" aria-describedby="emailHelp"
+                    formControlName="quantity" [min]="0" (change)="validateInput(1, $event)">
+            </div>
+            <div class="mb-3">
+                <label for="salePrice" class="form-label fw-bold">Price</label>
+                <input type="number" class="form-control" id="salePrice" formControlName="price" [min]="0"
+                    (change)="validateInput(2, $event)">
+            </div>
+
+            <button [disabled]="!saveBtn" type="submit" class="btn btn-primary" (click)="onSave()">Save</button>
+        </form>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-10 mx-auto mt-3">
+
+        <div *ngIf="dataSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Registration Success!</strong>
+            <P>{{successMsg}}</P>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="dataFailure" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Registration Failed!</strong>
+            <p>{{errorMsg}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>

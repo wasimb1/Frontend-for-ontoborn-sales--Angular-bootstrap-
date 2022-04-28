@@ -1,0 +1,44 @@
+<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark shadow-sm mb-5">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">OntoBorn Sales</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-display="static"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a routerLink="/home" class="active nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/sales" class="nav-link">sales</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/about" class="nav-link">about</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li *ngIf="!logged" class="nav-item me-2">
+                    <a routerLink="/register" class="nav-link badge bg-success my-2 p-2 text-light">Register</a>
+                </li>
+                <li *ngIf="!logged" class="nav-item me-2">
+                    <a routerLink="/login" class="nav-link badge  bg-primary my-2 px-3 py-2 text-light">Login</a>
+                </li>
+                <li *ngIf="logged" class="nav-item me-2">
+                    <a (click)="logout()" class="nav-link badge bg-danger my-2 px-3 py-2 text-light">Logout</a>
+                </li>
+                <!-- <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">create sale</a></li>
+                        <li><a class="dropdown-item" href="#">Fetch sales</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</nav>

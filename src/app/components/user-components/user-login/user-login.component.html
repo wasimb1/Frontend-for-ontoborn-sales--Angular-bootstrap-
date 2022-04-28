@@ -1,0 +1,36 @@
+<div class="row shadow-lg round pb-4 pt-3 mx-auto" [ngStyle]="{'max-width': '36%'}">
+    <h4 class="text-center display-4">User Login</h4>
+    <p class="text-center fw-bold">Login using your credentials</p>
+    <div class="col-1"></div>
+    <div class="col px-4">
+        <form class="form" [formGroup]="userLoginForm" (change)="onBlur()">
+            <div class="input-group mb-3">
+                <!-- <label for="emailId" class="form-label fw-bold">Email address</label> -->
+                <span class="input-group-text" id="">Email</span>
+                <input type="email" class="form-control" id="emailId" aria-describedby="emailHelp"
+                    formControlName="email">
+            </div>
+            <div class="input-group mb-3">
+                <!-- <label for="password" class="form-label fw-bold">Password</label> -->
+                <span class="input-group-text" id="password">password</span>
+                <input type="password" class="form-control" id="password" formControlName="password">
+            </div>
+
+            <button [disabled]="!loginBtn" type="submit" class="btn btn-primary w-100" (click)="onSave()">login</button>
+        </form>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-10 mx-auto mt-3">
+
+        <div *ngIf="dataSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>login Success!</strong>
+            <P>{{successMsg}}</P>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="dataFailure" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Login Failed!</strong>
+            <p>{{errorMsg}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
