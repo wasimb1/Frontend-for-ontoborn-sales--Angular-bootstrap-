@@ -11,7 +11,7 @@ export class AllSalesComponent implements OnInit {
   sales: any[] = [];
   errMsg: string = '';
   user: any;
-  logged: boolean = true;
+  logged: boolean = false;
   isError: boolean = false;
   dataSuccess: boolean = false;
   dataFailure: boolean = false;
@@ -30,6 +30,7 @@ export class AllSalesComponent implements OnInit {
       console.log('locallalal');
       let cUser: any = localStorage.getItem('loggedUser');
       this.user = JSON.parse(cUser);
+      this.logged = true;
     }
     console.info(this.user);
     this.getSales();

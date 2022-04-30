@@ -4,7 +4,7 @@
             <table class="table caption-top align-middle">
                 <caption>
                     <span>All Sales</span>
-                    <a routerLink="/new-sale" class="btn btn-sm btn-success mx-3 mt-1">New sale</a>
+                    <a *ngIf="logged" routerLink="/new-sale" class="btn btn-sm btn-success mx-3 mt-1">New sale</a>
                 </caption>
                 <thead class="table-light">
                     <tr>
