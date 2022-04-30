@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonServiceService } from 'src/app/services/common-service.service';
@@ -10,7 +10,7 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
 })
 export class HeaderComponent implements OnInit {
   user: any;
-  logged: boolean = false;
+  @Input() logged: boolean = false;
   private loggedInUser: Subscription = new Subscription;
 
   constructor(
