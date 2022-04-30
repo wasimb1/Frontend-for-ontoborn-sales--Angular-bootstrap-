@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CommonServiceService } from 'src/app/services/common-service.service';
 
 @Component({
@@ -9,13 +10,21 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
 })
 export class HeaderComponent implements OnInit {
   user: any;
-  logged: boolean = true;
-  messageReceived: any;
+  logged: boolean = false;
+  private loggedInUser: Subscription = new Subscription;
 
   constructor(
     private router: Router,
     private comonService: CommonServiceService
-  ) {}
+  ) {
+    console.log("before logged", this.logged);
+    this.loggedInUser = this.comonService.getUpdate().subscribe(
+      value => {
+        this.logged = value;
+      }
+    );
+    console.log("after logged", this.logged);
+  }
 
   ngOnInit(): void {
     if (
@@ -30,14 +39,7 @@ export class HeaderComponent implements OnInit {
     }
     console.info(this.user);
   }
-
-  get isSidebarVisible(): boolean {
-    return this.comonService.isLogged;
-  }
-
-  toggleLogg() {
-    this.comonService.toggleLogIn();
-  }
+  
 
   logout() {
     console.log(this.user);

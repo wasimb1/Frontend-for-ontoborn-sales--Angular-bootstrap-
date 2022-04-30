@@ -25,9 +25,8 @@ export class UserLoginComponent implements OnInit {
     private fb: FormBuilder,
     private usersService: UserService,
     private router: Router,
-    comonService: CommonServiceService
+    private comonService: CommonServiceService
   ) {
-    this.loggedIn = comonService.isLogged;
   }
 
   ngOnInit(): void {}
@@ -50,7 +49,8 @@ export class UserLoginComponent implements OnInit {
           this.user = result;
           this.dataSuccess = true;
           localStorage.setItem('loggedUser', JSON.stringify(this.user));
-
+          this.loggedIn = true;
+          this.sendMessage();
           this.successMsg = 'User Registered.';
 
           setTimeout(() => {
@@ -68,6 +68,10 @@ export class UserLoginComponent implements OnInit {
       }
     );
     this.clearForm();
+  }
+
+  sendMessage(): void{
+    this.comonService.sendUpdate(this.loggedIn);
   }
 
   clearForm() {
