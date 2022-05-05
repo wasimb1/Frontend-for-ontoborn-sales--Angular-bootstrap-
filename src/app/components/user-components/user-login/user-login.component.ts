@@ -26,8 +26,7 @@ export class UserLoginComponent implements OnInit {
     private usersService: UserService,
     private router: Router,
     private comonService: CommonServiceService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {}
 
@@ -50,12 +49,12 @@ export class UserLoginComponent implements OnInit {
           this.dataSuccess = true;
           localStorage.setItem('loggedUser', JSON.stringify(this.user));
           this.loggedIn = true;
-          this.sendMessage();
+          this.comonService.checklogIn(this.loggedIn);
           this.successMsg = 'User Registered.';
 
           setTimeout(() => {
             this.redirect();
-          }, 3000);
+          }, 1000);
         }
       },
       (err) => {
@@ -68,10 +67,6 @@ export class UserLoginComponent implements OnInit {
       }
     );
     this.clearForm();
-  }
-
-  sendMessage(): void{
-    this.comonService.sendUpdate(this.loggedIn);
   }
 
   clearForm() {

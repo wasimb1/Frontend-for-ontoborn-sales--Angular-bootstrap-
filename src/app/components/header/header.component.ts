@@ -10,42 +10,33 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
 })
 export class HeaderComponent implements OnInit {
   user: any;
-  @Input() logged: boolean = false;
-  private loggedInUser: Subscription = new Subscription;
+  logged: boolean = false;
+  // private loggedInUser: Subscription = new Subscription;
 
   constructor(
     private router: Router,
-    private comonService: CommonServiceService
+    private commonService: CommonServiceService
   ) {
-    console.log("before logged", this.logged);
-    this.loggedInUser = this.comonService.getUpdate().subscribe(
-      value => {
-        this.logged = value;
-      }
-    );
-    console.log("after logged", this.logged);
+    // this.loggedInUser = this.comonService.getUpdate().subscribe(
+    //   value => {
+    //     this.logged = value;
+    //   }
+    // );
+    this.commonService.loggedUser.subscribe((loggedUser) => {
+      this.logged = loggedUser;
+      console.log('header logged subs', this.logged);
+    });
+    console.log('header logged', this.logged);
   }
 
-  ngOnInit(): void {
-    if (
-      localStorage.getItem('loggedUser') == null ||
-      localStorage.getItem('loggedUser') == undefined
-    ) {
-      this.logged = false;
-    } else {
-      console.log('locallalal');
-      let cUser: any = localStorage.getItem('loggedUser');
-      this.user = JSON.parse(cUser);
-    }
-    console.info(this.user);
-  }
-  
+  ngOnInit(): void {}
 
   logout() {
     console.log(this.user);
     localStorage.removeItem('loggedUser');
     this.logged = false;
-
+    this.commonService.loggedUser.next(this.logged);
+    console.log('inside header logout', this.logged);
     this.router.navigate(['/home']);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SalesService } from 'src/app/services/sales.service';
+import { CommonServiceService } from 'src/app/services/common-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,21 +19,18 @@ export class AllSalesComponent implements OnInit {
   errorMsg: string = '';
   successMsg: string = '';
 
-  constructor(private salesService: SalesService) {}
+  constructor(
+    private salesService: SalesService,
+    private commonService: CommonServiceService
+  ) {
+    this.commonService.loggedUser.subscribe((loggedUser) => {
+      this.logged = loggedUser;
+      console.log('sales logged', this.logged);
+    });
+    console.log('sales logged', this.logged);
+  }
 
   ngOnInit(): void {
-    if (
-      localStorage.getItem('loggedUser') == null ||
-      localStorage.getItem('loggedUser') == undefined
-    ) {
-      this.logged = false;
-    } else {
-      console.log('locallalal');
-      let cUser: any = localStorage.getItem('loggedUser');
-      this.user = JSON.parse(cUser);
-      this.logged = true;
-    }
-    console.info(this.user);
     this.getSales();
   }
 
