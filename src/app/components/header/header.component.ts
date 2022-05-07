@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     console.log(this.user);
-    localStorage.removeItem('loggedUser');
+    localStorage.removeItem('userToken');
     this.logged = false;
     this.commonService.loggedUser.next(this.logged);
     console.log('inside header logout', this.logged);
