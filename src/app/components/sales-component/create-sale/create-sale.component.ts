@@ -40,6 +40,7 @@ export class CreateSaleComponent implements OnInit {
     console.log('userRegistrationForm valid:', this.newSaleForm.valid);
 
     const data = this.newSaleForm.value;
+
     console.log(data);
     const uri = `/sales`;
     this.salesService.saveNewSale(data, uri).subscribe({
@@ -62,7 +63,7 @@ export class CreateSaleComponent implements OnInit {
         console.info('Completed');
         setTimeout(() => {
           this.redirect();
-        }, 3000);
+        }, 2000);
       },
     });
 

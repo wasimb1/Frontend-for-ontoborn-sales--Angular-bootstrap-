@@ -57,8 +57,12 @@ export class SalesService {
     this.apiUrl = environment.apiUrl + uri;
     console.log(data);
     console.log(this.apiUrl);
-
-    return this.http.post(this.apiUrl, data);
+    let userToken: any = localStorage.getItem('userToken');
+    userToken = JSON.parse(userToken);
+    console.warn(userToken.userToken);
+    let header = new HttpHeaders().set('userToken', userToken.userToken);
+    console.warn(header);
+    return this.http.post(this.apiUrl, data, { headers: header });
   }
 
   removeSale(uri: string) {

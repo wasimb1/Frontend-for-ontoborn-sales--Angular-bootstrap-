@@ -9,8 +9,8 @@ export class CommonServiceService {
   loggedUser = new BehaviorSubject<boolean>(false);
 
   checklogIn(loggedIn: boolean) {
-    let cUser: any = localStorage.getItem('loggedUser');
-    if (cUser == null || cUser == undefined || cUser.length < 0) {
+    let userToken: any = localStorage.getItem('userToken');
+    if (userToken == null || userToken == undefined || userToken.length < 0) {
       loggedIn = false;
       console.log('checkLogin if', loggedIn);
       this.loggedUser.next(loggedIn);

@@ -15,7 +15,7 @@ export class UserLoginComponent implements OnInit {
   });
 
   loginBtn: boolean = this.userLoginForm.valid;
-  user: any;
+  userToken: any;
   dataSuccess: boolean = false;
   dataFailure: boolean = false;
   loggedIn: boolean = false;
@@ -45,9 +45,9 @@ export class UserLoginComponent implements OnInit {
       (result: any) => {
         {
           console.log(result);
-          this.user = result;
+          this.userToken = result;
           this.dataSuccess = true;
-          localStorage.setItem('loggedUser', JSON.stringify(this.user));
+          localStorage.setItem('userToken', JSON.stringify(this.userToken));
           this.loggedIn = true;
           this.comonService.checklogIn(this.loggedIn);
           this.successMsg = 'User Registered.';

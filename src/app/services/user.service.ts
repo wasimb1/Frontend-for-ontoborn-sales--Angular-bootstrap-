@@ -43,6 +43,6 @@ export class UserService {
     const options = {
       params: new HttpParams({ fromString: '_page=1&_limit=20' }),
     };
-    return this.http.post(this.apiUrl, data, options);
+    return this.http.post(this.apiUrl, data);
   }
 }
