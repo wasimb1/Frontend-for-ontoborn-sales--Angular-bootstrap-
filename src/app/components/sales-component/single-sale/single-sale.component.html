@@ -2,11 +2,12 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-body" *ngFor="let s of sale">
-                    <h5 class="card-title">{{s.name}}</h5>
-                    <p class="card-text"><strong>Quantity === </strong>{{s.quantity}}</p>
-                    <p class="card-text"><strong>Price === </strong>{{s.price}}</p>
-                    <a [routerLink]="['/sales',s._id,'update']" class="btn btn-warning">Edit sale</a>
+                <div class="card-body" *ngIf="sale">
+                    <h5 class="card-title">{{sale.name}}</h5>
+                    <p class="card-text"><strong>Quantity === </strong>{{sale.quantity}}</p>
+                    <p class="card-text"><strong>Price === </strong>{{sale.price}}</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non ipsum est laboriosam quo illum eaque eius. Fugit, nostrum deleniti. Dolorum necessitatibus, modi earum obcaecati laboriosam error fuga illum in eveniet? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos reiciendis, labore hic voluptates dignissimos, sit officia numquam modi aliquid, molestiae omnis perferendis corporis magni aperiam ad necessitatibus nam expedita eveniet?</p>
+                    <a class="btn btn-warning" (click)="onEdit()">Edit sale</a>
                 </div>
             </div>
         </div>

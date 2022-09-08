@@ -37,6 +37,6 @@ export class HeaderComponent implements OnInit {
     this.logged = false;
     this.commonService.loggedUser.next(this.logged);
     console.log('inside header logout', this.logged);
-    this.router.navigate(['/home']);
+    this.router.navigate(['']);
   }
 }

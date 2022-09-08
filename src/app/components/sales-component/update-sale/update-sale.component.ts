@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SalesService } from 'src/app/services/sales.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-update-sale',
   templateUrl: './update-sale.component.html',
   styleUrls: ['./update-sale.component.css'],
 })
-export class UpdateSaleComponent implements OnInit {
+export class UpdateSaleComponent implements OnInit, OnDestroy {
+  saleSubscription!: Subscription;
   updateSaleForm = this.fb.group({
     name: [null, Validators.required],
     quantity: [0, Validators.required],
@@ -30,12 +32,15 @@ export class UpdateSaleComponent implements OnInit {
     private router: Router,
     private salesService: SalesService
   ) {}
+  ngOnDestroy(): void {
+    this.saleSubscription.unsubscribe();
+  }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log('id', id);
-    this.saleId = id;
-    this.getSale(this.saleId);
+    this.saleSubscription = this.route.params.subscribe((params: Params) => {
+      this.saleId = params['id'];
+      this.getSale(this.saleId);
+    });
   }
 
   onBlur(): void {

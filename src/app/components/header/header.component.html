@@ -8,22 +8,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a routerLink="/home" class="active nav-link">Home</a>
+                <li class="nav-item" >
+                    <a [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a routerLink="/sales" class="nav-link">sales</a>
+                    <a [routerLink]="['sales']" routerLinkActive="active" class="nav-link">sales</a>
                 </li>
                 <li class="nav-item">
-                    <a routerLink="/about" class="nav-link">about</a>
+                    <a [routerLink]="['about']" routerLinkActive="active" class="nav-link">about</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li *ngIf="logged === false" class="nav-item me-2">
-                    <a routerLink="/register" class="nav-link badge bg-success my-2 p-2 text-light">Register</a>
+                    <a [routerLink]="['register']" class="nav-link badge bg-success my-2 p-2 text-light">Register</a>
                 </li>
                 <li *ngIf="logged === false" class="nav-item me-2">
-                    <a routerLink="/login" class="nav-link badge  bg-primary my-2 px-3 py-2 text-light">Login</a>
+                    <a [routerLink]="['login']" class="nav-link badge  bg-primary my-2 px-3 py-2 text-light">Login</a>
                 </li>
                 <li *ngIf="logged === true" class="nav-item me-2">
                     <a (click)="logout()" class="nav-link badge bg-danger my-2 px-3 py-2 text-light"

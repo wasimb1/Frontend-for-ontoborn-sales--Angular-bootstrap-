@@ -45,4 +45,13 @@ export class UserService {
     };
     return this.http.post(this.apiUrl, data);
   }
+
+  getLoggedIUser(uri: string): any {
+    this.apiUrl = environment.apiUrl + '/users' + uri;
+    let userToken: any = localStorage.getItem('userToken');
+    userToken = JSON.parse(userToken);
+    let header = new HttpHeaders().set('userToken', userToken.userToken);
+    console.warn(header);
+    return this.http.get(this.apiUrl, { headers: header });
+  }
 }

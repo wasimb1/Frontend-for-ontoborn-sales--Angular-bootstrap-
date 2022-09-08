@@ -50,7 +50,7 @@ export class UserLoginComponent implements OnInit {
           localStorage.setItem('userToken', JSON.stringify(this.userToken));
           this.loggedIn = true;
           this.comonService.checklogIn(this.loggedIn);
-          this.successMsg = 'User Registered.';
+          this.successMsg = 'User Loggedin.';
 
           setTimeout(() => {
             this.redirect();

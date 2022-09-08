@@ -18,6 +18,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AllSalesComponent } from './components/sales-component/all-sales/all-sales.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SalesModule } from './modules/sale/sales.module';
+import { UserModule } from './modules/user/user.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +42,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SalesModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

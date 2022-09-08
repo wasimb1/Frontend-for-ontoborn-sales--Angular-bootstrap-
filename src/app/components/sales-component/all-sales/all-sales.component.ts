@@ -1,7 +1,10 @@
+import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { SalesService } from 'src/app/services/sales.service';
 import { CommonServiceService } from 'src/app/services/common-service.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserModule } from 'src/app/modules/user/user.module';
+import { SalesModule } from 'src/app/modules/sale/sales.module';
 
 @Component({
   selector: 'app-all-sales',
@@ -9,9 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./all-sales.component.css'],
 })
 export class AllSalesComponent implements OnInit {
-  sales: any[] = [];
+  sales: SalesModule[] = [];
   errMsg: string = '';
-  user: any;
+  user!: UserModule;
   logged: boolean = false;
   isError: boolean = false;
   dataSuccess: boolean = false;
@@ -21,13 +24,20 @@ export class AllSalesComponent implements OnInit {
 
   constructor(
     private salesService: SalesService,
-    private commonService: CommonServiceService
+    private userService: UserService,
+    private commonService: CommonServiceService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.commonService.loggedUser.subscribe((loggedUser) => {
       this.logged = loggedUser;
       console.log('sales logged', this.logged);
     });
     console.log('sales logged', this.logged);
+    this.commonService.loggedInUser.subscribe((loggedInUser) => {
+      this.user = loggedInUser;
+      console.log('LoggedIn User', loggedInUser);
+    });
   }
 
   ngOnInit(): void {
@@ -48,6 +58,29 @@ export class AllSalesComponent implements OnInit {
       },
       complete: () => console.info('Completed'),
     });
+  }
+
+  viewSale(saleId: string) {
+    console.log('sales logged', this.logged);
+    this.userService.getLoggedIUser('/me').subscribe({
+      next: (user: any) => {
+        console.log(user);
+        this.commonService.checkLoggedInUser(user);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+      complete: () => console.log('complete'),
+    });
+    // this.router.navigate([saleId], { relativeTo: this.route });
+  }
+
+  onEdit(id: string) {
+    this.router.navigate(
+      ['sales', id, 'update'],
+      // { relativeTo: this.route },
+      { queryParams: { allowUpadte: '1', fragment: 'update' } }
+    );
   }
 
   deleteSale(id: string) {

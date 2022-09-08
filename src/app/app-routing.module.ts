@@ -16,12 +16,18 @@ const routes: Routes = [
   { path: 'login', component: UserLoginComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'new-sale', component: CreateSaleComponent },
-  { path: 'sales/:id', component: SingleSaleComponent },
-  { path: 'sales', component: AllSalesComponent },
-  { path: 'sales/:id/update', component: UpdateSaleComponent },
-  { path: 'sales/:id/delete', component: DeleteSaleComponent },
-  { path: 'home', component: HomePageComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+  {
+    path: 'sales',
+    component: AllSalesComponent,
+    children: [
+      { path: ':id', component: SingleSaleComponent },
+      { path: ':id/update', component: UpdateSaleComponent },
+      { path: ':id/delete', component: DeleteSaleComponent },
+    ],
+  },
+  { path: '', component: HomePageComponent },
+  // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];
 

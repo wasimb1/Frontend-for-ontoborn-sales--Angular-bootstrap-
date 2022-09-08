@@ -1,53 +1,61 @@
-<div class="container shadow">
+<div class="container-fluid">
     <div class="row">
-        <div class="col">
-            <table class="table caption-top align-middle">
-                <caption>
-                    <span>All Sales</span>
-                    <a *ngIf="logged" routerLink="/new-sale" class="btn btn-sm btn-success mx-3 mt-1">New sale</a>
-                </caption>
-                <thead class="table-light">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">SaleId</th>
-                        <th scope="col">Sale Name</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                        <th scope="col" *ngIf="logged">Actions</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let sale of sales; index as i">
-                    <tr>
-                        <th scope="row">{{i+1}}</th>
-                        <td>{{sale._id}}</td>
-                        <td>{{sale.name}}</td>
-                        <td>{{sale.quantity}}</td>
-                        <td>{{sale.price}}</td>
-                        <td *ngIf="logged">
-                            <div>
-                                <span class="me-2">
-                                    <a [routerLink]="['/sales', sale._id]" class="my-2 pe-2 py-2 text-primary">
-                                        <i class="bi bi-eye-fill" style="font-size: 1.5rem;
-                                                                            font-weight: 700;"></i></a>
-                                </span>
-                                <span class="me-2">
-                                    <a [routerLink]="['/sales',sale._id, 'update']" class="my-2 pe-2 py-2 text-warning">
-                                        <i class="bi bi-pencil-square" style="font-size: 1.5rem;
-                                            font-weight: 700;"></i></a>
-                                </span>
-                                <span class="nav-item me-2">
-                                    <a (click)="deleteSale(sale._id)" class="my-2 pe-2 py-2 text-danger">
-                                        <i class="bi bi-archive-fill" style="font-size: 1.5rem;
-                                            font-weight: 700;"></i></a>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-
-                </tfoot>
-            </table>
+        <div class="col-sm-12 col-md-5 shadow">
+            <div class="table-responsive">
+                <table class="table caption-top  align-middle">
+                    <caption>
+                        <span>All Sales</span>
+                        <a *ngIf="logged" [routerLink]="['/new-sale']" class="btn btn-sm btn-success mx-3 mt-1">New sale</a>
+                    </caption>
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <!-- <th scope="col">SaleId</th> -->
+                            <th scope="col">Sale Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col" *ngIf="logged">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let sale of sales; index as i">
+                        <tr>
+                            <th scope="row">{{i+1}}</th>
+                            <!-- <td>{{sale._id}}</td> -->
+                            <td>{{sale.name}}</td>
+                            <td>{{sale.quantity}}</td>
+                            <td>{{sale.price}}</td>
+                            <td *ngIf="logged">
+                                <div>
+                                    <span class="me-2">
+                                        <a class="my-2 pe-2 py-2 text-primary" (click)="viewSale(sale._id)"
+                                        [routerLink]="[sale._id]"
+                                        [queryParams]="{allowEdit: user._id === sale.owner? 1 : 0}">
+                                            <i class="bi bi-eye-fill" style="font-size: 1.5rem;
+                                                                                            font-weight: 700;"></i></a>
+                                    </span>
+                                    <span class="me-2">
+                                        <a class="my-2 pe-2 py-2 text-warning" (click)="onEdit(sale._id)">
+                                            <i class="bi bi-pencil-square" style="font-size: 1.5rem;
+                                                            font-weight: 700;"></i></a>
+                                    </span>
+                                    <span class="nav-item me-2">
+                                        <a (click)="deleteSale(sale._id)" class="my-2 pe-2 py-2 text-danger">
+                                            <i class="bi bi-archive-fill" style="font-size: 1.5rem;
+                                                            font-weight: 700;"></i></a>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                
+                    </tfoot>
+                </table>
+            </div>
+            
+        </div>
+        <div class="col-sm-12 col-md-7">
+            <router-outlet></router-outlet>
         </div>
         <div class="col-10 mx-auto mt-3">
 
@@ -63,3 +71,4 @@
             </div>
         </div>
     </div>
+</div>
